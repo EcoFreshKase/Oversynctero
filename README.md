@@ -24,7 +24,7 @@ If you have a problem with the setup or installation please check the FAQ.
 
 If you press the extensions button in Chrome you should see the Oversynctero extension.
 
-### Use Oversynctero
+## Use Oversynctero
 
 1. Go to your [Overleaf](https://www.overleaf.com/project) Project
 2. Open Oversynctero in the extensions menu
