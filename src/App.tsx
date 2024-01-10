@@ -23,10 +23,10 @@ function App() {
     API_key: "",
   });
   const [selectedCollection, setSelectedCollection] = useState<string>("");
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+  const [validSettings, setValidSettings] = useState<boolean>(
     !checkIfSettingsValid()
   );
-  const [validSettings, setValidSettings] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
   // Disable button when settings are invalid
