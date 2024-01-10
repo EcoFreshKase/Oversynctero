@@ -1,8 +1,8 @@
 # Oversynctero
 
-Oversynctero is a Chrome Plugin to automatically synchronies a .bib file in your Overleaf project with your Zotero Online Storage for free.
+Oversynctero is a Chrome Plugin to automatically synchronize a .bib file in your Overleaf project with your Zotero Online Storage for free.
 
-# How to User Oversynctero
+# How to use Oversynctero
 
 If you have a problem with the setup or installation please check the FAQ.
 
@@ -33,7 +33,7 @@ If you press the extensions button in Chrome you should see the Oversynctero ext
 5. You might need to change the API_ENDPOINT in some special cases but for most cases you can ignore the setting
 6. Go back to Home
 7. Select your Zotero Connection to synchronize in Overleaf
-8. Press "IMPORT RESFS.BIB"
+8. Press "IMPORT REFS.BIB"
 9. Your Zotero Collection should now be copied into your .bib file (might take a second or two)
 10. Continue working on your Overleaf project
 
