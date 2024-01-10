@@ -13,6 +13,7 @@ import CollectionsComponent from "./components/CollectionsComponent";
 import SettingsComponent from "./components/SettingsComponent";
 import { main } from "./util/handleOverleaf";
 import { save, load } from "./util/storageApi";
+import { getCurTab } from "./util/chromeUtils";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState(0);
@@ -23,13 +24,29 @@ function App() {
   });
   const [selectedCollection, setSelectedCollection] = useState<string>("");
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(
-    checkIfSettingsValid()
+    !checkIfSettingsValid()
   );
+  const [validSettings, setValidSettings] = useState<boolean>(false);
 
   // Disable button when settings are invalid
   useEffect(() => {
-    setButtonDisabled(checkIfSettingsValid());
+    setValidSettings(!checkIfSettingsValid());
   }, [settings, selectedCollection]);
+
+  // Disable button if active Tab is not Overleaf.com
+  useEffect(() => {
+    let checkCurTab = async () => {
+      let curTab = await getCurTab();
+      if (curTab?.url?.includes("overleaf.com")) {
+        setButtonDisabled(false);
+        console.log("On Overleaf.com!!!");
+      } else {
+        setButtonDisabled(true);
+        console.log("Not on Overleaf.com");
+      }
+    };
+    checkCurTab();
+  }, []);
 
   useEffect(() => {
     load("settings", (value: any) => {
@@ -99,7 +116,7 @@ function App() {
               onClick={async () => {
                 main(await api.export_collection(settings, selectedCollection));
               }}
-              disabled={buttonDisabled}
+              disabled={buttonDisabled || validSettings}
             >
               Import refs.bib
             </Button>
@@ -135,10 +152,9 @@ function App() {
   // otherwise returns true
   function checkIfSettingsValid() {
     return (
-      settings.API_ENDPOINT === "" ||
-      settings.User_id === "" ||
-      settings.API_key === "" ||
-      selectedCollection === ""
+      settings.API_ENDPOINT !== "" &&
+      settings.User_id !== "" &&
+      settings.API_key !== ""
     );
   }
 }
