@@ -4,7 +4,7 @@ Oversynctero is a Chrome Plugin to automatically synchronies a .bib file in your
 
 # How to User Oversynctero
 
-If you have a problem with the setup please check the FAQ.
+If you have a problem with the setup or installation please check the FAQ.
 
 ## Setup
 
@@ -13,7 +13,7 @@ If you have a problem with the setup please check the FAQ.
 - get your Zotero User Id
 - make sure you have a file in your Overleaf project with the .bib extension
 
-### Install Oversynctero
+## Install Oversynctero
 
 1. download the latest release of Oversynctero
 2. Go to your Chrome Extension Settings Page
