@@ -58,7 +58,16 @@ export default class API {
     return (await this.send_request("/collections", settings)).json();
   };
 
-  export_collection = async (settings: UserSettings, collectionId: string, format: string = "bibtex"): Promise<string> => {
-    return (await this.send_request("/collections/" + collectionId + "/items?format=" + format, settings)).text();
-  }
+  export_collection = async (
+    settings: UserSettings,
+    collectionId: string,
+    format: string = "bibtex"
+  ): Promise<string> => {
+    return (
+      await this.send_request(
+        "/collections/" + collectionId + "/items?format=" + format,
+        settings
+      )
+    ).text();
+  };
 }

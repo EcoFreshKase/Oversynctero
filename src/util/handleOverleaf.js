@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 async function getCurTab() {
   return (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
 }
@@ -36,7 +37,7 @@ function saveInRefsBib(text) {
   }
 }
 
-export async function main(text) {
+export async function main(text, callback) {
   let curTab = await getCurTab();
 
   // execute Script in active tab
@@ -45,4 +46,5 @@ export async function main(text) {
     func: saveInRefsBib,
     args: [text],
   });
+  setTimeout(callback, 1000);
 }

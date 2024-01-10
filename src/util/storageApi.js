@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export function save(key, value, callback) {
   const obj = {};
   obj[key] = value;
