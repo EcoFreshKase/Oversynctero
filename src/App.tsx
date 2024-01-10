@@ -22,6 +22,14 @@ function App() {
     API_key: "",
   });
   const [selectedCollection, setSelectedCollection] = useState<string>("");
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(
+    checkIfSettingsValid()
+  );
+
+  // Disable button when settings are invalid
+  useEffect(() => {
+    setButtonDisabled(checkIfSettingsValid());
+  }, [settings, selectedCollection]);
 
   useEffect(() => {
     load("settings", (value: any) => {
@@ -91,6 +99,7 @@ function App() {
               onClick={async () => {
                 main(await api.export_collection(settings, selectedCollection));
               }}
+              disabled={buttonDisabled}
             >
               Import refs.bib
             </Button>
@@ -116,6 +125,22 @@ function App() {
       </Paper>
     </Box>
   );
+
+  // Checks if the current settings are valid
+  // returns false if:
+  // - API_ENDPOINT is empty
+  // - User_id is empty
+  // - API_key is empty
+  // - selectedCollection is empty
+  // otherwise returns true
+  function checkIfSettingsValid() {
+    return (
+      settings.API_ENDPOINT === "" ||
+      settings.User_id === "" ||
+      settings.API_key === "" ||
+      selectedCollection === ""
+    );
+  }
 }
 
 export default App;
