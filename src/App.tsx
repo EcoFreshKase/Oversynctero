@@ -117,7 +117,9 @@ function App() {
               disabled={
                 loading ||
                 selectedCollection == "" ||
-                selectedCollection == undefined
+                selectedCollection == undefined ||
+                buttonDisabled ||
+                validSettings
               }
               onClick={async () => {
                 setLoading(true);
@@ -128,7 +130,6 @@ function App() {
                   }
                 );
               }}
-              disabled={buttonDisabled || validSettings}
             >
               {!loading ? "Import into .bib file" : "Loading"}
             </Button>
