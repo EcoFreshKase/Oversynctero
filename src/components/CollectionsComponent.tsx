@@ -39,7 +39,7 @@ const CollectionsComponent: FunctionComponent<CollectionsProps> = (
       .catch(() => {
         console.log("invalid credentials");
       });
-  }, [properties.selectedCollectionId, properties.settings]);
+  }, [properties.settings]);
 
   useEffect(() => {
     setSelectedCollection(properties.selectedCollectionId);
