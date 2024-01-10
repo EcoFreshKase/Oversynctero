@@ -13,6 +13,7 @@ import CollectionsComponent from "./components/CollectionsComponent";
 import SettingsComponent from "./components/SettingsComponent";
 import { main } from "./util/handleOverleaf";
 import { save, load } from "./util/storageApi";
+import { getCurTab } from "./util/chromeUtils";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState(0);
@@ -22,7 +23,31 @@ function App() {
     API_key: "",
   });
   const [selectedCollection, setSelectedCollection] = useState<string>("");
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(
+    !checkIfSettingsValid()
+  );
+  const [validSettings, setValidSettings] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+
+  // Disable button when settings are invalid
+  useEffect(() => {
+    setValidSettings(!checkIfSettingsValid());
+  }, [settings, selectedCollection]);
+
+  // Disable button if active Tab is not Overleaf.com
+  useEffect(() => {
+    let checkCurTab = async () => {
+      let curTab = await getCurTab();
+      if (curTab?.url?.includes("overleaf.com")) {
+        setButtonDisabled(false);
+        console.log("On Overleaf.com!!!");
+      } else {
+        setButtonDisabled(true);
+        console.log("Not on Overleaf.com");
+      }
+    };
+    checkCurTab();
+  }, []);
 
   useEffect(() => {
     load("settings", (value: any) => {
@@ -103,6 +128,7 @@ function App() {
                   }
                 );
               }}
+              disabled={buttonDisabled || validSettings}
             >
               {!loading ? "Import into .bib file" : "Loading"}
             </Button>
@@ -128,6 +154,21 @@ function App() {
       </Paper>
     </Box>
   );
+
+  // Checks if the current settings are valid
+  // returns false if:
+  // - API_ENDPOINT is empty
+  // - User_id is empty
+  // - API_key is empty
+  // - selectedCollection is empty
+  // otherwise returns true
+  function checkIfSettingsValid() {
+    return (
+      settings.API_ENDPOINT !== "" &&
+      settings.User_id !== "" &&
+      settings.API_key !== ""
+    );
+  }
 }
 
 export default App;
