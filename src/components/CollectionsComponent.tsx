@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import API, { Collection, UserSettings } from "../util/api";
 import { Delete, Folder } from "@mui/icons-material";
 import {
+  CircularProgress,
   IconButton,
   List,
   ListItem,
@@ -47,7 +48,17 @@ const CollectionsComponent: FunctionComponent<CollectionsProps> = (
   return (
     <List dense={true} sx={{ height: "calc(100% - 100px)" }}>
       {loading ? (
-        <Skeleton variant="rounded" height="100%" width="100%" />
+        <>
+          <Skeleton variant="rounded" height="100%" width="100%" />
+          <CircularProgress
+            sx={{
+              position: "absolute",
+              top: "calc(50% - 20px)",
+              left: "calc(50% - 20px)",
+            }}
+            size={40}
+          />
+        </>
       ) : (
         collections.map((element) => (
           <ListItemButton
