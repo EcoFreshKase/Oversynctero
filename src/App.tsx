@@ -27,6 +27,7 @@ function App() {
     !checkIfSettingsValid()
   );
   const [validSettings, setValidSettings] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   // Disable button when settings are invalid
   useEffect(() => {
@@ -113,12 +114,23 @@ function App() {
             <Button
               variant="contained"
               sx={{ width: "100%", pr: 5, pl: 5, mb: 5 }}
+              disabled={
+                loading ||
+                selectedCollection == "" ||
+                selectedCollection == undefined
+              }
               onClick={async () => {
-                main(await api.export_collection(settings, selectedCollection));
+                setLoading(true);
+                main(
+                  await api.export_collection(settings, selectedCollection),
+                  () => {
+                    setLoading(false);
+                  }
+                );
               }}
               disabled={buttonDisabled || validSettings}
             >
-              Import refs.bib
+              {!loading ? "Import into .bib file" : "Loading"}
             </Button>
           </>
         ) : (
