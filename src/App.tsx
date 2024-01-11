@@ -23,7 +23,7 @@ function App() {
     API_key: "",
   });
   const [selectedCollection, setSelectedCollection] = useState<string>("");
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+  const [isUrlInvalid, setUrlInvalid] = useState<boolean>(false);
   const [validSettings, setValidSettings] = useState<boolean>(
     !checkIfSettingsValid()
   );
@@ -39,10 +39,10 @@ function App() {
     let checkCurTab = async () => {
       let curTab = await getCurTab();
       if (curTab?.url?.includes("overleaf.com")) {
-        setButtonDisabled(false);
+        setUrlInvalid(false);
         console.log("On Overleaf.com!!!");
       } else {
-        setButtonDisabled(true);
+        setUrlInvalid(true);
         console.log("Not on Overleaf.com");
       }
     };
@@ -65,7 +65,7 @@ function App() {
     load("selectedCollection", (value: any) => {
       console.log("Selected:", value);
       if (value !== undefined && value["id"] !== undefined) {
-        console.log("taking this collectionId", value["id"]);
+        console.log("using collectionId from storage:", value["id"]);
         setSelectedCollection(value["id"]);
       }
     });
@@ -118,20 +118,28 @@ function App() {
                 loading ||
                 selectedCollection == "" ||
                 selectedCollection == undefined ||
-                buttonDisabled ||
+                isUrlInvalid ||
                 validSettings
               }
               onClick={async () => {
                 setLoading(true);
-                main(
-                  await api.export_collection(settings, selectedCollection),
-                  () => {
-                    setLoading(false);
-                  }
+                const exportedCollection = await api.export_collection(
+                  settings,
+                  selectedCollection
                 );
+
+                if (exportedCollection !== undefined) {
+                  main(exportedCollection, () => {
+                    setLoading(false);
+                  });
+                }
               }}
             >
-              {!loading ? "Import into .bib file" : "Loading"}
+              {isUrlInvalid
+                ? "Cant import on this website"
+                : !loading
+                ? "Import into .bib file"
+                : "Loading"}
             </Button>
           </>
         ) : (
