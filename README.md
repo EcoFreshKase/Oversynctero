@@ -63,3 +63,7 @@ If you press the extensions button in Chrome you should see the Oversynctero ext
 1. Open Oversynctero in the extensions menu
 2. Select your Zotero Collection
 3. Press "IMPORT REFS.BIB"
+
+## Oversynctero doesn't import more than 100 items of my collection
+
+This is a know limitation with the Zotero API. We decided that this issue is not important for now but it will be fixed in the future if necessary.
