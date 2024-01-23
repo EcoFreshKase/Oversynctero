@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "manifest_version": 3,
   "name": "Oversynctero",
   "description": "Oversynctero is a Chrome Plugin to automatically synchronies a .bib file in your Overleaf project with your Zotero Online Storage for free.",
