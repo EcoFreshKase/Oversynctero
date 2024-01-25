@@ -46,7 +46,7 @@ const CollectionsComponent: FunctionComponent<CollectionsProps> = (
   }, [properties.selectedCollectionId]);
 
   return (
-    <List dense={true} sx={{ height: "calc(100% - 100px)" }}>
+    <List dense={true} sx={{ height: "calc(100% - 100px)" }} className={"collectionList"}>
       {loading ? (
         <>
           <Skeleton variant="rounded" height="100%" width="100%" />
