@@ -4,7 +4,13 @@ async function getCurTab() {
 }
 
 function saveInRefsBib(text) {
-  switchToRefsBib();
+  if (!switchToRefsBib()) {
+    console.log("Switching to refs.bib failed");
+    alert(
+      "Switching to .bib file failed. There might not be a .bib file in the project."
+    );
+    return;
+  }
 
   setTimeout(() => {
     changeEditorText(text);
@@ -13,11 +19,11 @@ function saveInRefsBib(text) {
   function switchToRefsBib() {
     let button = findRefsBibButton();
     if (!button) {
-      console.log("No Button found!");
-      return;
+      return false;
     }
 
     button.click(); //switch to refs.bib editing
+    return true;
   }
 
   // Finds a button with a child span with inner html = refs.bib
