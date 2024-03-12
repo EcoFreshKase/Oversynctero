@@ -7,7 +7,7 @@ function saveInRefsBib(text) {
   if (!switchToRefsBib()) {
     console.log("Switching to refs.bib failed");
     createPopUp(
-      "Switching to .bib file failed. There might not be a .bib file in the project."
+      "Switching to .bib file failed. Please make sure to first create a .bib file in the overleaf project."
     );
     return;
   }
@@ -45,7 +45,7 @@ function saveInRefsBib(text) {
   function createPopUp(text) {
     let popUp = document.createElement("p");
     popUp.innerHTML = text;
-    popUp.className = "pop-up";
+    popUp.className = "oversynctero-pop-up";
     document.body.appendChild(popUp);
 
     setTimeout(() => {
