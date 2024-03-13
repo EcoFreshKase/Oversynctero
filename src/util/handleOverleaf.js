@@ -4,7 +4,13 @@ async function getCurTab() {
 }
 
 function saveInRefsBib(text) {
-  switchToRefsBib();
+  if (!switchToRefsBib()) {
+    console.log("Switching to refs.bib failed");
+    createPopUp(
+      "Switching to .bib file failed. Please make sure to first create a .bib file in the overleaf project."
+    );
+    return;
+  }
 
   setTimeout(() => {
     changeEditorText(text);
@@ -13,11 +19,11 @@ function saveInRefsBib(text) {
   function switchToRefsBib() {
     let button = findRefsBibButton();
     if (!button) {
-      console.log("No Button found!");
-      return;
+      return false;
     }
 
     button.click(); //switch to refs.bib editing
+    return true;
   }
 
   // Finds a button with a child span with inner html = refs.bib
@@ -35,10 +41,27 @@ function saveInRefsBib(text) {
     document.getElementsByClassName("cm-content cm-lineWrapping")[0].innerHTML =
       text;
   }
+
+  function createPopUp(text) {
+    let popUp = document.createElement("p");
+    popUp.innerHTML = text;
+    popUp.className = "oversynctero-pop-up";
+    document.body.appendChild(popUp);
+
+    setTimeout(() => {
+      popUp.style.animationName = "oversynctero-fade-out";
+      setTimeout(() => popUp.remove(), 300);
+    }, 4000);
+  }
 }
 
 export async function main(text, callback) {
   let curTab = await getCurTab();
+
+  await chrome.scripting.insertCSS({
+    files: ["errorPopUpStyle.css"],
+    target: { tabId: curTab.id },
+  });
 
   // execute Script in active tab
   await chrome.scripting.executeScript({
