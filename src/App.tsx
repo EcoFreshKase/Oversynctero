@@ -94,7 +94,17 @@ function App() {
         justifyContent: "space-between",
       }}
     >
-      <Paper sx={{ pl: 2, pr: 2, height: "100%", overflowY: "scroll" }}>
+      <Paper
+        sx={{
+          pl: 2,
+          pr: 2,
+          height: "100%",
+          overflowY: "hidden",
+          display: "flex",
+          justifyContent: "space-evenly",
+          flexDirection: "column",
+        }}
+      >
         {currentMenu === 0 ? (
           <>
             <CollectionsComponent
@@ -113,7 +123,7 @@ function App() {
             />
             <Button
               variant="contained"
-              sx={{ width: "100%", pr: 5, pl: 5, mb: 5 }}
+              sx={{ width: "100%", pr: 5, pl: 5 }}
               disabled={
                 loading ||
                 selectedCollection == "" ||
