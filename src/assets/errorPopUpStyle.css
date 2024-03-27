@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.oversynctero-pop-up::before {
+  content: "⚠︎";
+  font-size: 20px;
+  margin-right: 10px;
+  color: #d32f2f;
+  padding-bottom: 3px;
+}
+
+.oversynctero-pop-up {
+  color: #5F2120;
+  background-color: #FDEDED;
+  font-family: 'Roboto', sans-serif;
+  animation: oversynctero-fade-in 0.3s ease-in-out normal forwards;
+  position: fixed;
+  top: 90%;
+  left: 3%;
+  transform-origin: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding-right: 5%;
+  max-width: 30%;
+  word-wrap: normal;
+  word-break: normal;
+}
+
+@keyframes oversynctero-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(100%); 
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes oversynctero-fade-out {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}

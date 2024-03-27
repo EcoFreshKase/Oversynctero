@@ -76,7 +76,7 @@ export default class API {
     format: string = "bibtex"
   ): Promise<string | undefined> => {
     const result = await this.send_request(
-      "/collections/" + collectionId + "/items?format=" + format,
+      "/collections/" + collectionId + "/items?limit=100&format=" + format,
       settings
     );
     return result !== false ? result.text() : undefined;

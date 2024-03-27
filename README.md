@@ -15,10 +15,10 @@ If you have a problem with the setup or installation please check the FAQ.
 
 ## Install Oversynctero
 
-1. download the latest release of Oversynctero
+1. download the latest release of Oversynctero from here [https://github.com/EcoFreshKase/Oversynctero/releases](https://github.com/EcoFreshKase/Oversynctero/releases) 
 2. Go to your Chrome Extension Settings Page
 3. Make sure developer mode is activated
-4. Go to [chrome://extensions/](chrome://extensions/)
+4. Go to `chrome://extensions/` or `brave://extensions/` or `edge://extensions/` etc. (for firefox it should be possible to install the extension but you will have to find it out yourself 🐻)
 5. Click "Load unpacked"
 6. Select the directory you downloaded
 
@@ -63,3 +63,7 @@ If you press the extensions button in Chrome you should see the Oversynctero ext
 1. Open Oversynctero in the extensions menu
 2. Select your Zotero Collection
 3. Press "IMPORT REFS.BIB"
+
+## Oversynctero doesn't import more than 100 items of my collection
+
+This is a know limitation with the Zotero API. We decided that this issue is not important for now but it will be fixed in the future if necessary.
