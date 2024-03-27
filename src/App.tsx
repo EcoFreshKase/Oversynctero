@@ -17,6 +17,7 @@ import { getCurTab } from "./util/chromeUtils";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState(0);
+  // ᓚᘏᗢ
   const [settings, setSettings] = useState<UserSettings>({
     API_ENDPOINT: "https://api.zotero.org",
     User_id: "",
