@@ -94,7 +94,16 @@ function App() {
         justifyContent: "space-between",
       }}
     >
-      <Paper sx={{ pl: 2, pr: 2, height: "100%", overflowY: "scroll" }}>
+      <Paper
+        sx={{
+          pl: 2,
+          pr: 2,
+          height: "100%",
+          overflowY: "scroll",
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
         {currentMenu === 0 ? (
           <>
             <CollectionsComponent
